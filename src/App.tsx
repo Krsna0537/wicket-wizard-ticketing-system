@@ -16,6 +16,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminStands from "./pages/admin/AdminStands";
 import AdminSeats from "./pages/admin/AdminSeats";
 import AdminMatchSeats from "./pages/admin/AdminMatchSeats";
+import About from "./pages/About";
+import HowToBook from "./pages/HowToBook";
+import FAQ from "./pages/FAQ";
 
 const queryClient = new QueryClient();
 
@@ -27,26 +30,31 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Navigation />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/match/:matchId" element={<Match />} />
-            
-            {/* Protected routes for regular users */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/bookings" element={<Bookings />} />
-            </Route>
-            
-            {/* Protected routes for admin users */}
-            <Route element={<ProtectedRoute requireAdmin={true} />}>
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/stadiums/:stadiumId/stands" element={<AdminStands />} />
-              <Route path="/admin/stands/:standId/seats" element={<AdminSeats />} />
-              <Route path="/admin/matches/:matchId/seats" element={<AdminMatchSeats />} />
-            </Route>
-            
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="min-h-screen bg-background">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/match/:matchId" element={<Match />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/how-to-book" element={<HowToBook />} />
+              <Route path="/faq" element={<FAQ />} />
+              
+              {/* Protected routes for regular users */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/bookings" element={<Bookings />} />
+              </Route>
+              
+              {/* Protected routes for admin users */}
+              <Route element={<ProtectedRoute requireAdmin={true} />}>
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/stadiums/:stadiumId/stands" element={<AdminStands />} />
+                <Route path="/admin/stands/:standId/seats" element={<AdminSeats />} />
+                <Route path="/admin/matches/:matchId/seats" element={<AdminMatchSeats />} />
+              </Route>
+              
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
